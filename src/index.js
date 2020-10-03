@@ -1,3 +1,4 @@
+require('dotenv').config();
 const restify = require('restify');
 const server = restify.createServer();
 
@@ -11,4 +12,4 @@ server.get('/gustavo', function (req, res, next) {
   return next();
 });
 
-server.listen(8080);
+server.listen(process.env.PORT || 8080);
