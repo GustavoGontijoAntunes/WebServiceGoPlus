@@ -1,15 +1,4 @@
-require('dotenv').config();
-const restify = require('restify');
-const server = restify.createServer();
 
-server.get('/', function (req, res, next) {
-  res.send('Hello World!');
-  return next();
-});
+const server = require('./server')
 
-server.get('/gustavo', function (req, res, next) {
-  res.send('Qualquer mensagem que você quiser aí');
-  return next();
-});
-
-server.listen(process.env.PORT || 8080);
+server.listen(process.env.PORT || 7777)
