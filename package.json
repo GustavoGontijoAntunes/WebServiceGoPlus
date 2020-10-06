@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specifed\"&& exit 1"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,14 +13,13 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
     "restify": "^8.5.1",
+    "restify-cors-middleware": "^1.1.1",
     "sha1": "^1.1.1"
   },
   "Devdependencies": {
     "nodemon": "^2.0.4"
-  },
-  "devDependencies": {
-    "mysql": "^2.18.1",
-    "restify-cors-middleware": "^1.1.1"
   }
 }
