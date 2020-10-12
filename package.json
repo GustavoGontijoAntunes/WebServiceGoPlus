@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "test": "ava --verbose"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,9 @@
     "sha1": "^1.1.1"
   },
   "Devdependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "ava": "^3.13.0",
+    "sha1": "^1.1.1",
+    "jsonwebtoken": "^8.5.1"
   }
 }
