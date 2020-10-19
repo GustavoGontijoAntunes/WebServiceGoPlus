@@ -7,10 +7,12 @@ const auth = deps => {
 		authenticate: (email, password) => {
 			return new Promise((resolve, reject) => {
 				const { connection, errorHandler } = deps
-				const queryString = 'SELECT id, email FROM usuario WHERE email = ? AND password = ?'
+				const queryString = 'SELECT Id, Email FROM Usuario WHERE Email = ? AND Senha = ?'
 				const queryData = [email, sha1(password)]
 
 				connection.query(queryString, queryData, (error, results) => {
+					console.log(error)
+					console.log(results)
 					if(error || !results.length){
 						errorHandler(error, 'Falha ao localizar o usuário', reject)
 						return false
@@ -19,6 +21,30 @@ const auth = deps => {
 					const { email, id } = results[0]
 
 					const token = jwt.sign({ email, id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 })
+
+					console.log(token)
+
+					resolve ({ token })
+				})
+			})
+		},
+
+		registrar: (Nome, Sobrenome, Email, Senha, Cidade, Telefone) => {
+			return new Promise((resolve, reject) => {
+				const { connection, errorHandler } = deps
+				const queryString = 'Insert into Usuario(Nome, Sobrenome, Email, Senha, Cidade, Telefone)' +
+									'Values (?, ?, ?, ?, ?, ?);'
+				const queryData = [Nome, Sobrenome, Email, sha1(Senha), Cidade, Telefone]
+
+				connection.query(queryString, queryData, (error, results) => {
+					if(error){
+						errorHandler(error, 'Falha ao registar o usuário.', reject)
+						return false
+					}
+
+					const id = results.insertId
+
+					const token = jwt.sign({ Email, id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 })
 
 					console.log(token)
 

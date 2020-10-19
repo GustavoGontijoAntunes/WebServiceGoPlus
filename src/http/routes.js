@@ -13,6 +13,16 @@ const routes = (server) => {
 		next()
 	})
 
+	server.post('/registro', async (req, res, next) => {
+		const { Nome, Sobrenome, Email, Senha, Cidade, Telefone } = req.params
+		try{
+			res.send(await db.auth().registrar(Nome, Sobrenome, Email, Senha, Cidade, Telefone))
+		} catch(error){
+			res.send(error)	
+		}
+		next()
+	})
+
 	server.get('/usuarios', async (req, res, next) => {
 		try{
 			res.send(await db.usuarios().all())

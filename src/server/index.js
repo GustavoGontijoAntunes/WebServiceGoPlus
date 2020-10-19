@@ -5,7 +5,7 @@ const routes = require('../http/routes')
 const cors = require('./cors')
 const jwtMiddleware = require('./jwtMiddleware')
 
-const exclusions = ['/autenticacao']
+const exclusions = (['/autenticacao', '/registro'])
 
 server.pre(cors.preflight)
 server.use(cors.actual)
