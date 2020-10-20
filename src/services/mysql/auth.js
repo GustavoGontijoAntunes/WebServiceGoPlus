@@ -38,7 +38,7 @@ const auth = deps => {
 
 				connection.query(queryString, queryData, (error, results) => {
 					if(error){
-						errorHandler(error, 'Falha ao registar o usuário.', reject)
+						errorHandler(error, 'Falha ao registrar o usuário.', reject)
 						return false
 					}
 
