@@ -3,16 +3,29 @@ const sha1 = require('sha1')
 
 const usuarios = deps => {
 	return {
-		all: () => {
+		user: (id) => {
 			return new Promise((resolve, reject) => {
 				const { connection, errorHandler } = deps
 
-				connection.query('SELECT id, email FROM usuario', (error, results) => {
+				connection.query('SELECT * FROM Usuario WHERE Id = ?', [id], (error, results) => {
 					if(error){
 						errorHandler(error, 'Falha ao listar os usuários', reject)
 						return false
 					}
-					resolve ({ usuarios: results })
+					resolve ({ usuario: results })
+				})
+			})
+		},
+		all: () => {
+			return new Promise((resolve, reject) => {
+				const { connection, errorHandler } = deps
+
+				connection.query('SELECT * FROM Usuario', (error, results) => {
+					if(error){
+						errorHandler(error, 'Falha ao listar os usuários', reject)
+						return false
+					}
+					resolve ({ usuario: results })
 				})
 			})
 		},

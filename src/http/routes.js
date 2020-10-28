@@ -23,7 +23,17 @@ const routes = (server) => {
 		next()
 	})
 
-	server.get('/usuarios', async (req, res, next) => {
+	server.post('/dadosusuario', async (req, res, next) => {
+		const { id } = req.params
+		try{
+			res.send(await db.usuarios().user(id))
+		} catch(error){
+			res.send(error)
+		}
+		next()
+	})
+
+	server.get('/usuario', async (req, res, next) => {
 		try{
 			res.send(await db.usuarios().all())
 		} catch(error){
@@ -32,7 +42,7 @@ const routes = (server) => {
 		next()
 	})
 
-	server.post('/usuarios', async (req, res, next) => {
+	server.post('/usuario', async (req, res, next) => {
 		const { name } = req.params
 		try{
 			res.send(await db.usuarios().save(name))
@@ -42,7 +52,7 @@ const routes = (server) => {
 		next()
 	})
 
-	server.put('/usuarios', async (req, res, next) => {
+	server.put('/usuario', async (req, res, next) => {
 		const { id, name } = req.params
 		try{
 			res.send(await db.usuarios().update(id, name))
@@ -52,7 +62,7 @@ const routes = (server) => {
 		next()
 	})
 	
-	server.del('/usuarios', async (req, res, next) => {
+	server.del('/usuario', async (req, res, next) => {
 		const { id } = req.params
 		try{
 			res.send(await db.usuarios().del(id))
