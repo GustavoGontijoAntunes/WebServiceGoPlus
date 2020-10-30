@@ -7,7 +7,7 @@ const auth = deps => {
 		authenticate: (email, password) => {
 			return new Promise((resolve, reject) => {
 				const { connection, errorHandler } = deps
-				const queryString = 'SELECT Id, Email FROM Usuario WHERE Email = ? AND Senha = ?'
+				const queryString = 'SELECT * FROM Usuario WHERE Email = ? AND Senha = ?'
 				const queryData = [email, sha1(password)]
 
 				connection.query(queryString, queryData, (error, results) => {
@@ -24,7 +24,7 @@ const auth = deps => {
 
 					console.log(token)
 
-					resolve ({ token, Id  })
+					resolve ({ usuario: results[0], token })
 				})
 			})
 		},
